@@ -1,7 +1,5 @@
-
-```lua
--- Configuration
-local part = game.Workspace.CameraCollection.cameraLL  -- the part to which the camera is locked
+-- cams
+local part = game.Workspace.CameraCollection.cameraLL
 local cameras = {
 	[1] = game.Workspace.CameraCollection.cameraLL,
 	[2] = game.Workspace.CameraCollection.cameraL,
@@ -10,7 +8,7 @@ local cameras = {
 }
 local currentCameraIndex = 1
 
--- Get GUI buttons
+-- gui stuffs
 local gui = game.Players.LocalPlayer.PlayerGui.ScreenGui
 local buttonL = gui.buttonL
 local buttonR = gui.buttonR
@@ -24,7 +22,7 @@ local function swapCamera()
 	workspace.CurrentCamera.CameraSubject = cameras[currentCameraIndex]
 end
 
--- Set up event listeners for GUI button clicks
+-- event listeners
 buttonL.MouseButton1Click:Connect(function()
 	currentCameraIndex = currentCameraIndex - 1
 	if currentCameraIndex < 1 then
@@ -41,7 +39,7 @@ buttonR.MouseButton1Click:Connect(function()
 	workspace.CurrentCamera.CameraSubject = cameras[currentCameraIndex]
 end)
 
--- Set up event listener for keyboard arrow key presses
+-- more event listeners
 game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
 	if gameProcessedEvent then
 		return
@@ -61,6 +59,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, gameProce
 	end
 end)
 
--- Lock camera to part
+-- camera lock
 workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
 workspace.CurrentCamera.CFrame = CFrame.new(part.Position) * CFrame.new(0, 0, -5)```
