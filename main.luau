@@ -61,4 +61,4 @@ end)
 
 -- camera lock
 workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
-workspace.CurrentCamera.CFrame = CFrame.new(part.Position) * CFrame.new(0, 0, -5)```
+workspace.CurrentCamera.CFrame = CFrame.new(part.Position) * CFrame.new(0, 0, -5)
