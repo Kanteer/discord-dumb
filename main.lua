@@ -1,64 +1,73 @@
--- cams
-local part = game.Workspace.CameraCollection.cameraLL
-local cameras = {
-	[1] = game.Workspace.CameraCollection.cameraLL,
-	[2] = game.Workspace.CameraCollection.cameraL,
-	[3] = game.Workspace.CameraCollection.cameraR,
-	[4] = game.Workspace.CameraCollection.cameraRR,
-}
-local currentCameraIndex = 1
+--config
+local part1 = game.Workspace.CameraCollection.cameraLL
+local part2 = game.Workspace.CameraCollection.cameraL
+local part3 = game.Workspace.CameraCollection.cameraR
+local part4 = game.Workspace.CameraCollection.cameraRR
 
--- gui stuffs
+local parts = {part1, part2, part3, part4}
+local currentPartIndex = 1
+
+--gui
 local gui = game.Players.LocalPlayer.PlayerGui.ScreenGui
 local buttonL = gui.buttonL
 local buttonR = gui.buttonR
 
--- Function to swap cameras
-local function swapCamera()
-	currentCameraIndex = currentCameraIndex + 1
-	if currentCameraIndex > #cameras then
-		currentCameraIndex = 1
-	end
-	workspace.CurrentCamera.CameraSubject = cameras[currentCameraIndex]
+--lock cam to part
+local function lockCameraToPart()
+	workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
+	workspace.CurrentCamera.CameraSubject = parts[currentPartIndex]
+	workspace.CurrentCamera.CFrame = CFrame.new(parts[currentPartIndex].Position) * CFrame.new(0,0,0.5)
 end
 
--- event listeners
-buttonL.MouseButton1Click:Connect(function()
-	currentCameraIndex = currentCameraIndex - 1
-	if currentCameraIndex < 1 then
-		currentCameraIndex = 4
+--swap parts
+local function swapPart()
+	currentPartIndex = currentPartIndex + 1
+	if currentPartIndex > #parts then
+		currentPartIndex = 1
+	else if
+		currentPartIndex = #parts
 	end
-	workspace.CurrentCamera.CameraSubject = cameras[currentCameraIndex]
+	lockCameraToPart()
+		end --(remove me)
+	end --(remove me)
+end
+
+--event listener
+buttonL.MouseButtonClick:Connect(function()
+	currentPartIndex = currentPartIndex - 1
+	if currentPartIndex < 1 then
+		currentParrtIndex = #parts
+		end
+	lockCameraToPart()
 end)
 
-buttonR.MouseButton1Click:Connect(function()
-	currentCameraIndex = currentCameraIndex + 1
-	if currentCameraIndex > 4 then
-		currentCameraIndex = 1
-	end
-	workspace.CurrentCamera.CameraSubject = cameras[currentCameraIndex]
+buttonR.MouseButtonClick:Connect(function()
+	currentPartIndex = currentPartIndex + 1
+	if currentPartIndex > #parts then
+		currentParrtIndex = 1
+		end
+	lockCameraToPart()
 end)
 
--- more event listeners
-game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
+--arrow keys
+game:GetService("UserInputService").InputBegan:Connect(funtion(input, gameProcessedEvent)
 	if gameProcessedEvent then
 		return
 	end
 	if input.KeyCode == Enum.KeyCode.Left then
-		currentCameraIndex = currentCameraIndex - 1
-		if currentCameraIndex < 1 then
-			currentCameraIndex = 4
+		currentPartIndex = currentPartIndex -1
+		if currentPartIndex < 1 then
+			currentPartIndex = #parts
 		end
-		workspace.CurrentCamera.CameraSubject = cameras[currentCameraIndex]
+	lockCameraToPart()
 	elseif input.KeyCode == Enum.KeyCode.Right then
-		currentCameraIndex = currentCameraIndex + 1
-		if currentCameraIndex > 4 then
-			currentCameraIndex = 1
+	currentPartIndex = currentPartIndex + 1
+	if currentPartIndex > #parts then
+		currentPartIndex = 1
 		end
-		workspace.CurrentCamera.CameraSubject = cameras[currentCameraIndex]
+	lockCameraToPart()
 	end
 end)
 
--- camera lock
-workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
-workspace.CurrentCamera.CFrame = CFrame.new(part.Position) * CFrame.new(0, 0, -5)
+--safety lock
+lockCameraToPart()
