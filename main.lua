@@ -28,8 +28,6 @@ local function swapPart()
 		currentPartIndex = #parts
 	end
 	lockCameraToPart()
-		end --(remove me)
-	end --(remove me)
 end
 
 --event listener
@@ -37,7 +35,7 @@ buttonL.MouseButtonClick:Connect(function()
 	currentPartIndex = currentPartIndex - 1
 	if currentPartIndex < 1 then
 		currentParrtIndex = #parts
-		end
+	end
 	lockCameraToPart()
 end)
 
@@ -45,7 +43,7 @@ buttonR.MouseButtonClick:Connect(function()
 	currentPartIndex = currentPartIndex + 1
 	if currentPartIndex > #parts then
 		currentParrtIndex = 1
-		end
+	end
 	lockCameraToPart()
 end)
 
